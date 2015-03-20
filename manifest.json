@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+
+    "name": "Animate Generator",
+    "version": "1.1",
+    "description": "Extends the Developer Tools, adding an audit category that finds broken links on the inspected page.",
+    "background": {
+        "scripts": [
+            "devtools/background.js"
+        ]
+    },
+    "devtools_page": "devtools/devtools.html",
+    "permissions": [
+        "experimental",
+        "tabs",
+        "http://*/*",
+            "https://*/*"
+    ]
+}
