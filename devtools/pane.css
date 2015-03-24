@@ -1,0 +1,11 @@
+.control-panel .hint {
+    display: none;
+}
+
+.control-panel.disabled .main-wrap {
+    display: none;
+}
+
+.control-panel.disabled .hint {
+    display: block;
+}

@@ -1,9 +1,14 @@
-(function() {
-    var AG_Melonh = {
-    };
+var stylesheet;
 
-    AG_Melonh.receiveElement(ele) = function() {
-        alert('hehe');
-        console.log(ele);
-    };
-})();
+AG_Melonh = {
+
+    _insertCss: function(cssText) {
+        if(!stylesheet) {
+            stylesheet = $('<style></style>');
+            stylesheet.appendTo($('head'));
+        }
+
+        stylesheet.html(cssText);
+    }
+}
+

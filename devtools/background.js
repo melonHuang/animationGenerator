@@ -1,19 +1,47 @@
-chrome.runtime.onConnect.addListener(function(cnt) {
-    function listener(msg) {
-        debugger;
+var connections = {};
 
-        if(msg.action == 'injectScript') {
+chrome.runtime.onConnect.addListener(function(port) {
+    function listener(msg) {
+
+        if(msg.name == 'init') {
+            connections[msg.tabId] = port;
+            return;
+        }
+
+        if(msg.name == 'injectScript') {
             for(var i = 0; i < msg.scriptToInject.length; i++) {
-                chrome.tabs.executeScript(msg.tagId, {
+                chrome.tabs.executeScript(msg.tabId, {
                     file: msg.scriptToInject[i]
                 });
             }
         }
     }
 
-    cnt.onMessage.addListener(listener);
+    port.onMessage.addListener(listener);
 
-    cnt.onDisconnect(function() {
-        cnt.onMessage.removeListener(listener);
+    port.onDisconnect.addListener(function() {
+        port.onMessage.removeListener(listener);
+    });
+
+    chrome.runtime.onMessage.addListener(function(msg) {
+        port.postMessage(msg);
     });
 });
+
+// Receive message from content script and relay to the devTools page for the
+// current tab
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    // Messages from content scripts should have sender.tab set
+    if (sender.tab) {
+      var tabId = sender.tab.id;
+      if (tabId in connections) {
+        connections[tabId].postMessage(request);
+      } else {
+        console.log("Tab not found in connection list.");
+      }
+    } else {
+      console.log("sender.tab not defined.");
+    }
+    return true;
+});
+
