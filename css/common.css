@@ -1,0 +1,87 @@
+a {
+    cursor: pointer;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+/* typography */
+body {
+    font: 16px/1.6 sans-serif;
+    background: white;
+}
+
+img {
+    max-width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.text-break {
+    word-break: break-word;
+}
+
+/* form */
+.form {
+}
+
+.form .form-control {
+}
+
+/* buttons */
+.btn { 
+    background: #ccc;
+    color: white;
+    display: inline-block;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 0 2em;
+    line-height: 40px;
+    text-align: center;
+}
+
+.btn:active {
+    //background: black;
+    //color: white;
+}
+
+/* helpers */
+.color-primary {
+    color: orange;
+}
+
+.color-info {
+    color: blue;
+}
+
+.clearfix {
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+

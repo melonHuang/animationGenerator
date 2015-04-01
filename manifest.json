@@ -5,9 +5,8 @@
     "version": "1.1",
     "description": "Extends the Developer Tools, adding an audit category that finds broken links on the inspected page.",
     "background": {
-        "scripts": [
-            "devtools/background.js"
-        ]
+        "page": "devtools/background.html"
+        //"persistent": false
     },
     "devtools_page": "devtools/devtools.html",
     "permissions": [
@@ -15,5 +14,8 @@
         "tabs",
         "http://*/*",
             "https://*/*"
-    ]
+    ],
+    "sandbox": {
+        "pages": ["devtools/sandbox.html"]
+    }
 }

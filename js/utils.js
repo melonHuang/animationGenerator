@@ -1,4 +1,4 @@
-window.Utils = {
+var Utils = {
     tmpl: function(str, data) {
         for(var prop in data) {
             if(data.hasOwnProperty(prop)) {
@@ -24,4 +24,11 @@ window.Utils = {
     mulReplace: function(e, t) {
         for(var n=0;n<t.length;n++)e=e.replace(t[n][0],t[n][1]);return e;
     }
+}
+
+if(module) {
+    module.exports = Utils;
+    //exports.Utils = Utils;
+} else {
+    window.Utils = Utils;
 }

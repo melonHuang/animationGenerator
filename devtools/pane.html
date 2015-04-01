@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /    >
     <title></title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/common.css" />
     <link rel="stylesheet" href="pane.css" />
 </head>
 <body>
-    <div class="control-panel">
+    <div class="control-panel disabled">
         <div class="main-wrap">
-            <form action="#" id="animate_form">
+            <form action="#" id="animate_form" class="form">
                 <dl>
-                    <dt>动画：</dt>
+                    <dt>Animation name</dt>
                     <dd>
                     <select name="animate_name">
-                        <option value="none">无</option>
+                        <option value="none">none</option>
                         <optgroup label="Attention Seekers">
                             <option value="bounce">bounce</option>
                             <option value="flash">flash</option>
@@ -135,28 +137,99 @@
                     </dd>
                 </dl>
                 <dl>
-                    <dt>时长(毫秒): </dt>
+                    <dt>Duration</dt>
                     <dd>
-                    <input type="number" name="animate_period" value="1000"/>
+                    <input type="number" name="animate_duration" value="1"/> sec
                     </dd>
                 </dl>
                 <dl>
-                    <dt>延时(毫秒): </dt>
+                    <dt>Delay</dt>
                     <dd>
-                    <input type="number" name="animate_delay" value="0"/>
+                    <input type="number" name="animate_delay" value="0"/> sec
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>Iteration Count</dt>
+                    <dd>
+                        <input type="number" name="animate_iteration_count" value="0"/>
+                        <label for="infinite_checkbox">
+                            <input id="infinite_checkbox" name="animate_iteration_infinite" type="checkbox" />
+                            <span>Infinite</span>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>Timing function</dt>
+                    <dd>
+                        <select name="animate_timing_function">
+                            <option value="ease" selected>ease</option>
+                            <option value="linear">linear</option>
+                            <option value="ease-in">ease-in</option>
+                            <option value="ease-out">ease-out</option>
+                            <option value="ease-in-out">ease-in-out</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>Selector format</dt>
+                    <dd>
+                    <input type="text" name="selector_format" value="{{your className}}"/>
+                    <br />
+                    <em>在这里可以定义你的选择器格式, eg. 当Selector format设为"{{your className}}"时，生成代码的选择器为".anim-yourclass"。当Selector format设为".active {{your className}}"时，生成代码的选择器为".active .anim-yourclass"</em>
                     </dd>
                 </dl>
             </form>
             <textarea class="generated-css"></textarea>
-            <a href="#" class="play">play</a>
+            <a href="#" class="play btn">预览</a>
         </div>
         <div class="hint">
-            Please select an element which has a class with prefix 'anim-';
+            <div class="top-bar">
+                请选中带有"anim-"前缀的class的元素，为它添加动画。
+            </div>
+            <div class="side">
+                <img src="../img/logo.png" alt="" class="logo" />
+            </div>
+            <div class="main">
+                <h1>Animate Generator</h1>
+                <p class="secondary">
+                    使动画制作更便捷
+                </p>
+
+                <h2>功能：</h2>
+                <ol class="fun-list">
+                    <li>
+                        <h3>使你的页面动起来</h3>
+                        <p>
+                            在原本静止的页面上，为元素添加动画并实时预览
+                        </p>
+                    </li>
+                    <li>
+                        <h3>预置Animate.css动画</h3>
+                    </li>
+                    <li>
+                        <h3>生成兼容不同浏览器的代码</h3>
+                    </li>
+                </ol>
+
+                <h2>正在努力向你奔来的新功能：</h2>
+                <ol class="fun-list">
+                    <li>添加自定义动画</li>
+                    <li>如果这些还不够，请在<a target="_blank" href="http://www.so.com">这儿</a>为我提供宝贵的建议</li>
+                </ol>
+
+                <h2>使用教程</h2>
+                <a href="">戳我</a>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="../js/zepto.114.js"></script>
     <script type="text/javascript" src="../js/zepto.ext.js"></script>
     <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/animate_library.js"></script>
+    <script type="text/javascript" src="../js/pleeease-3.2.4.min.js"></script>
     <script type="text/javascript" src="pane.js"></script>
+
+    <!--
+    -->
 </body>
 </html>

@@ -55,6 +55,53 @@
       return jsonObj;
     };
 
+
+    $.fn.fillFromJSON = function(obj) {
+        el = $(this);
+        if (!obj || typeof obj != 'object') {
+            return;
+        }
+        var field, tagName, type, value;
+        var isChecked = function(option, value) {
+            if (Object.isArray(value)) {
+                for (var i = 0; i < value.length; i++) {
+                    if (option.prop('value') == value[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                return option.prop('value') == value;
+            }
+        };
+        el = $(el);
+        for (var key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            field = el.find('[name=' + key + ']');
+            if (!field.length) {
+                continue;
+            }
+            tagName = field.prop('tagName').toLowerCase();
+            type = field.prop('type').toLowerCase();
+            value = obj[key];
+            if (tagName == 'input' && (type == 'radio' || type == 'checkbox')) { //单选和复选框特殊处理
+                for(var i = 0; i < field.length; i++) {
+                    var option = $(field[i]);
+                    if (isChecked(option, value)) {
+                        option.prop('checked', true);
+                    } else {
+                        option.prop('checked', false);
+                    }
+                    option.trigger('change');
+                }
+            } else {
+                field.val(value);
+            }
+        }
+    }
+
     /**************************** history *******************************/
     $.history = {
         pushState: function(stateObj) {

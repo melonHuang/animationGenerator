@@ -1,4 +1,5 @@
 var connections = {};
+var sandboxFrame = document.querySelector('iframe');
 
 chrome.runtime.onConnect.addListener(function(port) {
     function listener(msg) {
@@ -14,6 +15,21 @@ chrome.runtime.onConnect.addListener(function(port) {
                     file: msg.scriptToInject[i]
                 });
             }
+        }
+
+        if(msg.name == 'pleeease') {
+            sandboxFrame.contentWindow.postMessage(msg, '*');
+            window.addEventListener('message', function(event) {
+                var msg = event.data;
+                if(event.source === sandboxFrame.contentWindow) {
+                    switch(msg.name) {
+                        case 'pleeease':
+                            port.postMessage(msg);
+                            break;
+                    }
+                }
+            });
+
         }
     }
 
