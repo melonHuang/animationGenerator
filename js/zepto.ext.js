@@ -63,7 +63,7 @@
         }
         var field, tagName, type, value;
         var isChecked = function(option, value) {
-            if (Object.isArray(value)) {
+            if (value.constructor == Array) {
                 for (var i = 0; i < value.length; i++) {
                     if (option.prop('value') == value[i]) {
                         return true;

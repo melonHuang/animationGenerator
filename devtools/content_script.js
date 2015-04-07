@@ -1,5 +1,6 @@
 var stylesheet;
 
+
 AG_Melonh = {
 
     insertCss: function(cssText) {
@@ -23,6 +24,12 @@ AG_Melonh = {
         setTimeout(function() {
             stylesheet.html(cssText);
         }, 0);
+    },
+
+    getEleClassName: function() {
+        var ele = eval('$0');
+        alert(ele.className);
+        return ele.className;
     }
 
 }

@@ -66,6 +66,7 @@ var app = {
                 useContentScriptContext: true
             });
         });
+
     },
 
     onCssCompiled: function(cssText) {
@@ -76,6 +77,8 @@ var app = {
     },
 
     onSelectionChanged: function() {
+
+        setTimeout(function() {
         chrome.devtools.inspectedWindow.eval("$0.className", {
             useContentScriptContext: true
         }, function(className) {
@@ -96,6 +99,7 @@ var app = {
 
             $('form').fillFromJSON(animObj[selectedClassName] || defaultConfig);
         });
+        }, 0);
     },
 
     connectBg: function() {
@@ -141,6 +145,11 @@ var app = {
             case 'pleeease':
                 this.onCssCompiled(msg.compiled);
                 break;
+
+            case 'tabRefreshed':
+                if(msg.tabId == chrome.devtools.inspectedWindow.tabId) {
+                    this.injectScript();
+                }
         }
     },
 

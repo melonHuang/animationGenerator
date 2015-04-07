@@ -1,6 +1,7 @@
 var connections = {};
 var sandboxFrame = document.querySelector('iframe');
 
+
 chrome.runtime.onConnect.addListener(function(port) {
     function listener(msg) {
 
@@ -41,6 +42,13 @@ chrome.runtime.onConnect.addListener(function(port) {
 
     chrome.runtime.onMessage.addListener(function(msg) {
         port.postMessage(msg);
+    });
+
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+        port.postMessage({
+            name: 'tabRefreshed',
+            tabId: tabId
+        });
     });
 });
 

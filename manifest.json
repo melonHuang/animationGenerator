@@ -1,16 +1,14 @@
 {
     "manifest_version": 2,
 
-    "name": "Animate Generator",
+    "name": "Animation Generator",
     "version": "1.1",
-    "description": "Extends the Developer Tools, adding an audit category that finds broken links on the inspected page.",
+    "description": "Generate CSS Animation code for your page",
     "background": {
         "page": "devtools/background.html"
-        //"persistent": false
     },
     "devtools_page": "devtools/devtools.html",
     "permissions": [
-        "experimental",
         "tabs",
         "http://*/*",
             "https://*/*"
